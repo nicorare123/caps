@@ -20,13 +20,16 @@ public class Playercon : MonoBehaviour
     private bool isGrounded;
     public LayerMask groundMask;  // 감지할 지면 레이어
 
-    
+    private Vector3 originalScale; // 초기 크기를 저장할 변수
+    private bool isShrinking = false; // 축소 상태를 저장할 변수
+    private bool isBlockedAbove = false;  // 위에 물체가 있는지 여부를 저장할 변수
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
 
-       
+        // 오브젝트의 초기 크기를 저장
+        originalScale = transform.localScale;
     }
 
     void Update()
@@ -38,7 +41,28 @@ public class Playercon : MonoBehaviour
         // 땅에 닿아있는지 Raycast로 감지
         GroundCheck();
 
+        // 위에 물체가 있는지 체크하는 함수 호출
+        CheckForObstacleAbove();
 
+        // 'C' 키가 눌러져 있으면
+        if (Input.GetKey(KeyCode.C))
+        {
+            // Y축 크기를 반으로 줄이기
+            if (!isShrinking)
+            {
+                transform.localScale = new Vector3(originalScale.x, originalScale.y / 2, originalScale.z);
+                isShrinking = true;
+            }
+        }
+        else
+        {
+            // 'C' 키가 떼어지면, 위에 물체가 없을 경우에만 원래 크기로 돌아오기
+            if (isShrinking && !isBlockedAbove)
+            {
+                transform.localScale = originalScale;
+                isShrinking = false;
+            }
+        }
     }
 
     void MovePlayer()
@@ -93,5 +117,25 @@ public class Playercon : MonoBehaviour
 
         // 디버그용: 레이캐스트 시각적으로 표시 (선택 사항)
         Debug.DrawRay(rayOrigin, Vector3.down * groundCheckDistance, Color.red);
+    }
+
+    void CheckForObstacleAbove()
+    {
+        // 캡슐의 머리 위로 Raycast 발사
+        float rayDistance = originalScale.y / 2 + 0.1f; // 캡슐의 반 높이 + 약간의 여유
+        RaycastHit hit;
+
+        // Ray를 위쪽으로 쏘아 물체가 있는지 확인
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, rayDistance))
+        {
+            isBlockedAbove = true; // 위에 물체가 있으면 true
+        }
+        else
+        {
+            isBlockedAbove = false; // 위에 물체가 없으면 false
+        }
+
+        // 디버그용: 레이캐스트 시각적으로 표시 (선택 사항)
+        Debug.DrawRay(transform.position, Vector3.up * rayDistance, Color.green);
     }
 }
