@@ -4,36 +4,33 @@ using UnityEngine;
 
 public class CameraLaycast : MonoBehaviour
 {
-    // 플레이어가 상호작용할 수 있는 거리
-    public float interactionDistance = 3f;
-    // 상호작용 대상 태그 (ex: "Interactable")
-    public string interactableTag = "Object";
+    public float rayDistance = 100f;  // 레이캐스트의 거리 설정
 
     void Update()
     {
-        // F키를 눌렀는지 확인
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            // 카메라의 정면을 기준으로 Ray를 쏩니다.
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        // 레이캐스트를 카메라의 전방 방향으로 쏘기 위해 Ray 생성
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
 
-            // Ray가 상호작용 가능한 물체에 닿는지 확인
-            if (Physics.Raycast(ray, out hit, interactionDistance))
+        // 레이캐스트의 디버그 라인을 초록색으로 그리기
+        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green);
+
+        // 레이캐스트 쏘기
+        if (Physics.Raycast(ray, out hit, rayDistance))
+        {
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                if (hit.collider.CompareTag(interactableTag))
+                // 충돌한 오브젝트가 "Object" 태그를 가진 경우
+                if (hit.collider.CompareTag("Object"))
                 {
-                    // 상호작용 로직 실행
-                    InteractWithObject(hit.collider.gameObject);
+                    // 김치 스크립트 실행
+                    Debug.Log("김치 스크립트가 실행되었습니다!");
+
+                    // 추가 동작을 이곳에 정의할 수 있습니다.
+                    // 예: hit.collider.gameObject.SetActive(false);
                 }
             }
         }
-    }
-
-    void InteractWithObject(GameObject interactableObject)
-    {
-        // 여기서 원하는 상호작용 내용을 작성하세요.
-        Debug.Log(interactableObject.name + "와 상호작용했습니다!");
     }
 
 }
