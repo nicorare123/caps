@@ -323,6 +323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 3
+  interactionDistance: 5
+  highlightMaterial: {fileID: 2100000, guid: b8cb1634efd6cfe4c93d339a920ab7a2, type: 2}
 --- !u!1 &1277205722
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +569,7 @@ GameObject:
   - component: {fileID: 1552733477}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
