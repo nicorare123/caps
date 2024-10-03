@@ -11,10 +11,12 @@ public class CameraLaycast : MonoBehaviour
     public Material highlightMaterial; // 하이라이트를 위한 Material 설정
 
     private GameObject InteractiveObject;
+    public InventoryManager inventoryManager;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && InteractiveObject != null)
         {
+           inventoryManager.AddItem(InteractiveObject);
            InteractiveObject.SetActive(false);
            InteractiveObject = null;
         }
