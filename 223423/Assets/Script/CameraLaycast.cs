@@ -10,16 +10,27 @@ public class CameraLaycast : MonoBehaviour
     private GameObject lastHighlightedObject; // 마지막으로 하이라이트된 오브젝트 저장
     public Material highlightMaterial; // 하이라이트를 위한 Material 설정
 
+    private GameObject InteractiveObject;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && InteractiveObject != null)
+        {
+           InteractiveObject.SetActive(false);
+           InteractiveObject = null;
+        }
+    }
     void FixedUpdate()
     {
-        // 레이캐스트를 카메라의 전방 방향으로 쏘기 위해 Ray 생성
+        CheckObject();       
+    }
+
+    void CheckObject()
+    {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
         // 레이캐스트의 디버그 라인을 초록색으로 그리기
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green);
-
-        // 레이캐스트 쏘기
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
             // 충돌한 오브젝트가 "Object" 태그를 가진 경우
@@ -50,16 +61,8 @@ public class CameraLaycast : MonoBehaviour
                             renderer.material = highlightMaterial; // 하이라이트 Material 적용
                         }
                     }
-
-                    // F 키를 누를 때 상호작용 실행
-                    if (Input.GetKeyDown(KeyCode.F))
-                    {
-                        Debug.Log("상호작용한 오브젝트: " + hit.collider.gameObject.name);
-                        Debug.Log("김치 스크립트가 실행되었습니다!");
-
-                        // 추가 동작을 이곳에 정의할 수 있습니다.
-                        // 예: hit.collider.gameObject.SetActive(false);
-                    }
+                    InteractiveObject = hit.collider.gameObject;
+                 
                 }
                 else
                 {
@@ -80,6 +83,7 @@ public class CameraLaycast : MonoBehaviour
                 lastHighlightedObject.GetComponent<Renderer>().material = originalMaterial;
                 lastHighlightedObject = null;
             }
+            InteractiveObject = null;
         }
     }
 }
