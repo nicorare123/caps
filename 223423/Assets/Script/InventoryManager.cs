@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class InventoryManager : MonoBehaviour
     }
 
     public List<InventoryItem> inventoryItems;
+
+    public Image BigImage;
+    public GameObject BigImagePanel;
+    public CanvasGroup BigImageCanvasGroup;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +31,12 @@ public class InventoryManager : MonoBehaviour
         foreach(var slot in itemSlots)
         {
             slot.gameObject.SetActive(false);
+        }
+        BigImagePanel.SetActive(false);
+
+        if (BigImageCanvasGroup != null)
+        {
+            BigImageCanvasGroup.blocksRaycasts = false;
         }
     }
 
@@ -55,10 +66,38 @@ public class InventoryManager : MonoBehaviour
                 if(invItem.itemName == items[i].name)
                 {
                     itemSlots[i].sprite = invItem.itemSprite;
+                    
+
+                    AddMouseEvent(itemSlots[i], invItem.itemSprite);
                     break;
                 }
             }
         }
+    }
+
+    void AddMouseEvent(Image slot, Sprite itemSprite)
+    {
+        EventTrigger trigger = slot.gameObject.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry pointerEnter = new EventTrigger.Entry();
+        pointerEnter.eventID = EventTriggerType.PointerEnter;
+        pointerEnter.callback.AddListener((eventData) => { ShowBigImage(itemSprite); });
+        trigger.triggers.Add(pointerEnter);
+
+        EventTrigger.Entry pointerExit = new EventTrigger.Entry();
+        pointerExit.eventID = EventTriggerType.PointerExit;
+        pointerExit.callback.AddListener((eventData) => { HideBigImage(); });
+        trigger.triggers.Add(pointerExit);
+    }
+
+    void ShowBigImage(Sprite itemSprite)
+    {
+        BigImage.sprite = itemSprite;
+        BigImagePanel.SetActive(true);
+    }
+    void HideBigImage()
+    {
+        BigImagePanel.SetActive(false);
     }
     void ToggleInventory()
     {
@@ -73,6 +112,8 @@ public class InventoryManager : MonoBehaviour
         else
         {
             Time.timeScale = 1f;
+
+            HideBigImage();
         }
     }
 }
