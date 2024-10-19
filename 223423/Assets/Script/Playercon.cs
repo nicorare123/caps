@@ -146,7 +146,7 @@ public class Playercon : MonoBehaviour
         if (other.gameObject.tag == "Door")
         {
             SceneManager.LoadScene("Stage2");
-            Debug.Log("±èÄ¡");
+            
         }
     }
 
