@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Playercon : MonoBehaviour
 {
@@ -138,4 +139,16 @@ public class Playercon : MonoBehaviour
         // 디버그용: 레이캐스트 시각적으로 표시 (선택 사항)
         Debug.DrawRay(transform.position, Vector3.up * rayDistance, Color.green);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // 트리거에 들어간 오브젝트가 "door" 태그를 가지고 있는지 확인
+        if (other.gameObject.tag == "Door")
+        {
+            SceneManager.LoadScene("Stage2");
+            Debug.Log("김치");
+        }
+    }
+
+
 }
