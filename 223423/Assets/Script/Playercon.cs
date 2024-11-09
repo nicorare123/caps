@@ -57,10 +57,15 @@ public class Playercon : MonoBehaviour
             }
         }
 
+       
+    }
+    private void FixedUpdate()
+    {
         // 문에 가까이 있을 때 "E" 키를 누르면 지정된 위치로 이동
         if (isNearDoor && Input.GetKeyDown(KeyCode.E))
         {
             MoveToTargetPosition();
+            Debug.Log("ee");
         }
     }
 
