@@ -12,18 +12,20 @@ public class CameraLaycast : MonoBehaviour
 
     private GameObject InteractiveObject;
     public InventoryManager inventoryManager;
+
+    public GameObject[] gimiceobject; // 기믹들
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && InteractiveObject != null)
         {
-           inventoryManager.AddItem(InteractiveObject);
-           InteractiveObject.SetActive(false);
-           InteractiveObject = null;
+            inventoryManager.AddItem(InteractiveObject);
+            InteractiveObject.SetActive(false);
+            InteractiveObject = null;
         }
     }
     void FixedUpdate()
     {
-        CheckObject();       
+        CheckObject();
     }
 
     void CheckObject()
@@ -64,7 +66,7 @@ public class CameraLaycast : MonoBehaviour
                         }
                     }
                     InteractiveObject = hit.collider.gameObject;
-                 
+
                 }
                 else
                 {
@@ -76,16 +78,32 @@ public class CameraLaycast : MonoBehaviour
                     }
                 }
             }
-        }
-        else
-        {
-            // 레이캐스트가 오브젝트에 충돌하지 않으면 이전에 하이라이트된 오브젝트 복원
-            if (lastHighlightedObject != null)
+            else if (hit.collider.CompareTag("Phone")) // 전화기누르면 gamemanager 조건 true
             {
-                lastHighlightedObject.GetComponent<Renderer>().material = originalMaterial;
-                lastHighlightedObject = null;
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    GameManager.instance.condition = true;
+                }
             }
-            InteractiveObject = null;
+            else if (hit.collider.CompareTag("Electric1")) // 전기전선 gamemanager 조건 true
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    gimiceobject[0].SetActive(true); //전기미니게임 시작
+                }
+            }
+            else
+            {
+                // 레이캐스트가 오브젝트에 충돌하지 않으면 이전에 하이라이트된 오브젝트 복원
+                if (lastHighlightedObject != null)
+                {
+                    lastHighlightedObject.GetComponent<Renderer>().material = originalMaterial;
+                    lastHighlightedObject = null;
+                }
+                InteractiveObject = null;
+            }
         }
     }
 }

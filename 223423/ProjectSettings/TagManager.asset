@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Object
   - Door
+  - Phone
+  - Electric1
   layers:
   - Default
   - TransparentFX
