@@ -8,6 +8,8 @@ TagManager:
   - Door
   - Phone
   - Electric1
+  - Phone1
+  - Phone2
   layers:
   - Default
   - TransparentFX

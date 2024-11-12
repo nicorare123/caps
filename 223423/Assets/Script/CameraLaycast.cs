@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraLaycast : MonoBehaviour
 {
@@ -10,10 +11,21 @@ public class CameraLaycast : MonoBehaviour
     private GameObject lastHighlightedObject; // 마지막으로 하이라이트된 오브젝트 저장
     public Material highlightMaterial; // 하이라이트를 위한 Material 설정
 
+    public GameObject textUiF;
+
     private GameObject InteractiveObject;
     public InventoryManager inventoryManager;
 
     public GameObject[] gimiceobject; // 기믹들
+
+    bool coditionPhone1=false;
+    bool coditionPhone2 = false;
+    public GameObject[] activeobject; // [0]전화기 등
+
+    public void Start()
+    {
+        textUiF.SetActive(false);
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && InteractiveObject != null)
@@ -80,18 +92,39 @@ public class CameraLaycast : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Phone")) // 전화기누르면 gamemanager 조건 true
             {
+                
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    
+                    GameManager.instance.condition[0] = true;
+                     coditionPhone1 = true;
+                }
+            }
+            else if (hit.collider.CompareTag("Phone1")) // 전화기누르면 gamemanager 조건 true
+            {
+
+                if (Input.GetKeyDown(KeyCode.F)&&coditionPhone1)
+                {
+                    GameManager.instance.condition[1] = true;
+                    coditionPhone2 = true;
+                }
+            }
+            else if (hit.collider.CompareTag("Phone2")) // 전화기누르면 gamemanager 조건 true
+            {
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    GameManager.instance.condition = true;
+                    GameManager.instance.condition[2] = true;
                 }
             }
-            else if (hit.collider.CompareTag("Electric1")) // 전기전선 gamemanager 조건 true
+            else if (hit.collider.CompareTag("Electric1") &&coditionPhone1 &&coditionPhone2) // 전기전선 gamemanager 조건 true
             {
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     gimiceobject[0].SetActive(true); //전기미니게임 시작
+                    activeobject[0].SetActive(true); // 전화기 활성화
+                    activeobject[1].SetActive(false); // 기존 전화기 비활성화
                 }
             }
             else
