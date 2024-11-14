@@ -15,18 +15,29 @@ public class sliding : MonoBehaviour
     private bool isOpening = false;
     private bool isClosing = false;
 
+    bool playertriger = false;
+
+    public AudioSource openSound;
+    public AudioSource closeSound;
+
     void Start()
     {
         // 초기 위치 저장
         leftDoorClosedPosition = leftDoor.position;
         rightDoorClosedPosition = rightDoor.position;
 
-        // 게임 시작 시 문 열기
-        Open();
+      
     }
 
     void Update()
     {
+        if (playertriger)
+        {
+            Open();
+            //문열리는소리재생
+            playertriger = false;
+        }
+
         if (isOpening)
         {
             OpenDoors();
@@ -44,7 +55,10 @@ public class sliding : MonoBehaviour
             isOpening = true;
             isClosing = false;
 
-            // 열림 상태를 유지한 후 닫히도록 타이머 시작
+            // 문 열림 소리 재생
+            if (openSound != null)
+                openSound.Play();
+
             StartCoroutine(CloseAfterDelay());
         }
     }
@@ -61,6 +75,10 @@ public class sliding : MonoBehaviour
         {
             isClosing = true;
             isOpening = false;
+
+            // 문 닫힘 소리 재생
+            if (closeSound != null)
+                closeSound.Play();
         }
     }
 
@@ -89,6 +107,14 @@ public class sliding : MonoBehaviour
             Vector3.Distance(rightDoor.position, rightDoorClosedPosition) < 0.01f)
         {
             isClosing = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playertriger = true;
         }
     }
 }
