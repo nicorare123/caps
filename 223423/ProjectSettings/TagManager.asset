@@ -10,6 +10,9 @@ TagManager:
   - Electric1
   - Phone1
   - Phone2
+  - Door1
+  - Ebutton
+  - Eopen
   layers:
   - Default
   - TransparentFX

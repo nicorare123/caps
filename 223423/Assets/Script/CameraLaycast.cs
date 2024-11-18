@@ -127,6 +127,24 @@ public class CameraLaycast : MonoBehaviour
                     activeobject[1].SetActive(false); // 기존 전화기 비활성화
                 }
             }
+            else if (hit.collider.CompareTag("Ebutton")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    Debug.Log("작동");
+                    GameManager.instance.condition[3] = true;
+                }
+            }
+            else if (hit.collider.CompareTag("Eopen")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    Debug.Log("엘베열리기");
+                    sliding.instance1.playerTrigger = true;
+                }
+            }
             else
             {
                 // 레이캐스트가 오브젝트에 충돌하지 않으면 이전에 하이라이트된 오브젝트 복원

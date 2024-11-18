@@ -24,8 +24,9 @@ public class Playercon : MonoBehaviour
     private bool isShrinking = false;
     private bool isBlockedAbove = false;
 
-    public Transform targetPosition; // 이동할 목적지
+    public Transform[] targetPosition; // 이동할 목적지
     private bool isNearDoor = false; // 문에 가까운지 여부를 확인하는 변수
+    private bool isNearDoor1 = false;
 
     void Start()
     {
@@ -65,8 +66,14 @@ public class Playercon : MonoBehaviour
         if (isNearDoor && Input.GetKeyDown(KeyCode.E))
         {
             MoveToTargetPosition();
-            Debug.Log("ee");
+            
         }
+        if (isNearDoor1 && Input.GetKeyDown(KeyCode.E)) //1층 비상구
+        {
+            MoveToTargetPosition1();
+
+        }
+
     }
 
     void MovePlayer()
@@ -119,7 +126,14 @@ public class Playercon : MonoBehaviour
     {
         if (targetPosition != null)
         {
-            transform.position = targetPosition.position;
+            transform.position = targetPosition[0].position;
+        }
+    }
+    void MoveToTargetPosition1()
+    {
+        if (targetPosition != null)
+        {
+            transform.position = targetPosition[1].position;
         }
     }
 
@@ -129,6 +143,10 @@ public class Playercon : MonoBehaviour
         {
             isNearDoor = true; // 문에 가까워졌음을 표시
         }
+        else if (other.CompareTag("Door1"))
+        {
+            isNearDoor1 = true; // 문에 가까워졌음을 표시
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -136,6 +154,10 @@ public class Playercon : MonoBehaviour
         if (other.CompareTag("Door"))
         {
             isNearDoor = false; // 문에서 멀어졌음을 표시
+        }
+        else if(other.CompareTag("Door1"))
+        {
+            isNearDoor1 = false; // 문에서 멀어졌음을 표시
         }
     }
 

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         condition[0] = false;
         condition[1] = false;
         condition[2] = false;
+        condition[3] = false;
     }
     void Update()
     {
@@ -54,6 +55,15 @@ public class GameManager : MonoBehaviour
             // 조건이 true라면 텍스트를 출력하고 사라지게 만듦
             StartCoroutine(DisplayText2());
             condition[2] = false;
+
+        }
+        else if (condition[3]) // 1층 엘베 버튼
+        {
+            Debug.Log("작동11");
+            TextUI.SetActive(true);
+            // 조건이 true라면 텍스트를 출력하고 사라지게 만듦
+            StartCoroutine(DisplayText3());
+            condition[3] = false;
 
         }
     }
@@ -88,6 +98,19 @@ public class GameManager : MonoBehaviour
     {
         // 텍스트 출력
         messageText.text = ".....";
+
+        // 3초 대기
+        yield return new WaitForSeconds(3f);
+
+        // 텍스트를 빈 문자열로 설정하여 텍스트를 사라지게 함
+        messageText.text = "";
+
+        TextUI.SetActive(false);
+    }
+    private IEnumerator DisplayText3()
+    {
+        // 텍스트 출력
+        messageText.text = "아무런 반응이 없다..";
 
         // 3초 대기
         yield return new WaitForSeconds(3f);
