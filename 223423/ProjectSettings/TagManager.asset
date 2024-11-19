@@ -13,6 +13,8 @@ TagManager:
   - Door1
   - Ebutton
   - Eopen
+  - Ebutton1
+  - password
   layers:
   - Default
   - TransparentFX

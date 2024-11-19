@@ -136,6 +136,15 @@ public class CameraLaycast : MonoBehaviour
                     GameManager.instance.condition[3] = true;
                 }
             }
+            else if (hit.collider.CompareTag("Ebutton1")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    Debug.Log("작동");
+                    GameManager.instance.condition[4] = true;
+                }
+            }
             else if (hit.collider.CompareTag("Eopen")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
             {
 
@@ -143,6 +152,14 @@ public class CameraLaycast : MonoBehaviour
                 {
                     Debug.Log("엘베열리기");
                     sliding.instance1.playerTrigger = true;
+                }
+            }
+            else if (hit.collider.CompareTag("password")) // 비밀번호키
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    gimiceobject[2].SetActive(true);
                 }
             }
             else
