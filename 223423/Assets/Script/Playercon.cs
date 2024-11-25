@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Playercon : MonoBehaviour
 {
+    
+
     public float speed = 5.0f;
     public float runSpeed = 10.0f;
     public float jumpForce = 2.0f;
@@ -27,6 +29,8 @@ public class Playercon : MonoBehaviour
     public Transform[] targetPosition; // 이동할 목적지
     private bool isNearDoor = false; // 문에 가까운지 여부를 확인하는 변수
     private bool isNearDoor1 = false;
+
+    
 
     void Start()
     {
@@ -72,6 +76,11 @@ public class Playercon : MonoBehaviour
         {
             MoveToTargetPosition1();
 
+        }
+        else if (CameraLaycast.instance1.iscardkey1)
+        {
+            MoveToTargetPosition2();
+            CameraLaycast.instance1.iscardkey1 = false;
         }
 
     }
@@ -134,6 +143,13 @@ public class Playercon : MonoBehaviour
         if (targetPosition != null)
         {
             transform.position = targetPosition[1].position;
+        }
+    }
+    void MoveToTargetPosition2()
+    {
+        if (targetPosition != null)
+        {
+            transform.position = targetPosition[2].position;
         }
     }
 

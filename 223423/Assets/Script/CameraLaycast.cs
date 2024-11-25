@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CameraLaycast : MonoBehaviour
 {
+    public static CameraLaycast instance1;
+
     public float rayDistance = 100f;  // 레이캐스트의 거리 설정
     public float interactionDistance = 5f;  // 상호작용이 가능한 거리 설정
     private Material originalMaterial; // 원래 오브젝트의 Material 저장
@@ -22,7 +24,25 @@ public class CameraLaycast : MonoBehaviour
     bool coditionPhone2 = false;
     public GameObject[] activeobject; // [0]전화기 등
 
-    public void Start()
+    public bool iscardkey = false; // 카드키 가지고있는지
+    public bool iscardkey1 = false; // 카드키 사용할건지
+    public bool isbattery = false;
+
+    private void Awake()
+    {
+        // 싱글톤 설정
+        if (instance1 == null)
+        {
+            instance1 = this;
+        }
+        else
+        {
+            Debug.LogWarning("A의 인스턴스가 이미 존재합니다! 중복 제거.");
+            Destroy(gameObject);
+        }
+    }
+
+        public void Start()
     {
         textUiF.SetActive(false);
     }
@@ -141,8 +161,18 @@ public class CameraLaycast : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    Debug.Log("작동");
-                    GameManager.instance.condition[4] = true;
+                    if (!iscardkey)
+                    {
+                        Debug.Log("작동");
+                        GameManager.instance.condition[4] = true;
+                    }
+                    else if (iscardkey)// 순간이동
+                    {
+                        Debug.Log("순간이동");
+                        iscardkey1 = true;
+                        iscardkey = false;
+                    }
+                   
                 }
             }
             else if (hit.collider.CompareTag("Eopen")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
@@ -160,6 +190,38 @@ public class CameraLaycast : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     gimiceobject[2].SetActive(true);
+                }
+            }
+            else if (hit.collider.CompareTag("Card")) // 비밀번호키
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    gimiceobject[3].SetActive(false);
+                    iscardkey = true;
+                }
+            }
+            else if (hit.collider.CompareTag("Battery")) // 배터리
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    gimiceobject[4].SetActive(false);
+                    isbattery = true;
+                }
+            }
+            else if (hit.collider.CompareTag("Connet")) // 배터리
+            {
+
+                if (Input.GetKeyDown(KeyCode.F)&&!isbattery) // 배터리 없을때
+                {
+                   
+                }
+                if (Input.GetKeyDown(KeyCode.F) && isbattery) // 배터리 있을때
+                {
+                    gimiceobject[5].SetActive(true);
+                    gimiceobject[6].SetActive(true);// 돌리기 기믹 ui 활성화 
+                    
                 }
             }
             else

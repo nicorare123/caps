@@ -15,6 +15,9 @@ TagManager:
   - Eopen
   - Ebutton1
   - password
+  - Card
+  - Battery
+  - Connet
   layers:
   - Default
   - TransparentFX
