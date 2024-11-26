@@ -18,6 +18,7 @@ TagManager:
   - Card
   - Battery
   - Connet
+  - Phone3
   layers:
   - Default
   - TransparentFX

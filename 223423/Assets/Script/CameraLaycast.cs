@@ -7,6 +7,7 @@ public class CameraLaycast : MonoBehaviour
 {
     public static CameraLaycast instance1;
 
+
     public float rayDistance = 100f;  // 레이캐스트의 거리 설정
     public float interactionDistance = 5f;  // 상호작용이 가능한 거리 설정
     private Material originalMaterial; // 원래 오브젝트의 Material 저장
@@ -27,6 +28,8 @@ public class CameraLaycast : MonoBehaviour
     public bool iscardkey = false; // 카드키 가지고있는지
     public bool iscardkey1 = false; // 카드키 사용할건지
     public bool isbattery = false;
+
+    public GameObject nomalending;
 
     private void Awake()
     {
@@ -55,10 +58,12 @@ public class CameraLaycast : MonoBehaviour
             InteractiveObject = null;
         }
     }
+
     void FixedUpdate()
     {
         CheckObject();
     }
+   
 
     void CheckObject()
     {
@@ -136,6 +141,19 @@ public class CameraLaycast : MonoBehaviour
                 {
                     GameManager.instance.condition[2] = true;
                 }
+            }
+            else if (hit.collider.CompareTag("Phone3")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                  
+                    Debug.Log("출력");
+                    nomalending.SetActive(true);
+
+                }
+
+
             }
             else if (hit.collider.CompareTag("Electric1") &&coditionPhone1 &&coditionPhone2) // 전기전선 gamemanager 조건 true
             {
@@ -221,9 +239,12 @@ public class CameraLaycast : MonoBehaviour
                 {
                     gimiceobject[5].SetActive(true);
                     gimiceobject[6].SetActive(true);// 돌리기 기믹 ui 활성화 
-                    
+                    gimiceobject[7].SetActive(true);
+
                 }
+               
             }
+           
             else
             {
                 // 레이캐스트가 오브젝트에 충돌하지 않으면 이전에 하이라이트된 오브젝트 복원
