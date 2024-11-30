@@ -14,6 +14,7 @@ public class Playercon : MonoBehaviour
     public float groundCheckDistance = 0.2f;
     public float mouseSensitivity = 300.0f;
     public Transform playerCamera;
+    public Vector3 startPosition;
 
     private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
@@ -39,7 +40,7 @@ public class Playercon : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         originalScale = transform.localScale;
-
+        targetPosition[3].position = startPosition;
         
     }
 
@@ -171,12 +172,10 @@ public class Playercon : MonoBehaviour
         }
         else if (other.CompareTag("Laser"))
         {
-            if (targetPosition != null)
-            {
-                Debug.Log("순간이동");
-                transform.position = targetPosition[3].position;
-            }
-            StartCoroutine(ActivateTemporarily());
+            // CharacterController 비활성화 후 위치 이동
+            controller.enabled = false;
+            transform.position = startPosition;
+            controller.enabled = true;
         }
     }
 
@@ -190,6 +189,7 @@ public class Playercon : MonoBehaviour
         {
             isNearDoor1 = false; // 문에서 멀어졌음을 표시
         }
+        
     }
     private IEnumerator ActivateTemporarily()
     {
