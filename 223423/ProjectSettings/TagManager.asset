@@ -19,6 +19,7 @@ TagManager:
   - Battery
   - Connet
   - Phone3
+  - Laser
   layers:
   - Default
   - TransparentFX

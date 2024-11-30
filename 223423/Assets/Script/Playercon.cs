@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Playercon : MonoBehaviour
 {
-    
+    public screenfade fadeScript;
 
     public float speed = 5.0f;
     public float runSpeed = 10.0f;
@@ -30,12 +30,17 @@ public class Playercon : MonoBehaviour
     private bool isNearDoor = false; // 문에 가까운지 여부를 확인하는 변수
     private bool isNearDoor1 = false;
 
-    
+    public Vector3 resetPosition;
+
+    public GameObject fadeobject;
+
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         originalScale = transform.localScale;
+
+        
     }
 
     void Update()
@@ -153,6 +158,7 @@ public class Playercon : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Door"))
@@ -162,6 +168,15 @@ public class Playercon : MonoBehaviour
         else if (other.CompareTag("Door1"))
         {
             isNearDoor1 = true; // 문에 가까워졌음을 표시
+        }
+        else if (other.CompareTag("Laser"))
+        {
+            if (targetPosition != null)
+            {
+                Debug.Log("순간이동");
+                transform.position = targetPosition[3].position;
+            }
+            StartCoroutine(ActivateTemporarily());
         }
     }
 
@@ -175,6 +190,17 @@ public class Playercon : MonoBehaviour
         {
             isNearDoor1 = false; // 문에서 멀어졌음을 표시
         }
+    }
+    private IEnumerator ActivateTemporarily()
+    {
+        // 오브젝트 활성화
+        fadeobject.SetActive(true);
+
+        // 지정된 시간 동안 대기
+        yield return new WaitForSeconds(3f);
+
+        // 오브젝트 비활성화
+        fadeobject.SetActive(false);
     }
 
 }
