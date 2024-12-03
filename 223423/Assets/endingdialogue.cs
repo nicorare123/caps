@@ -4,10 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
 public class endingdialogue : MonoBehaviour
 {
     public Text dialogueText; // 대사를 표시할 UI Text
     public Text endText; // "End.."를 표시할 UI Text
+
+    public GameObject player;
+    public Transform Targetpos;
 
     private string[] dialogues =
     {
@@ -22,7 +26,10 @@ public class endingdialogue : MonoBehaviour
 
     void Start()
     {
+       
         StartCoroutine(ShowDialogue());
+        player.transform.position = Targetpos.position;
+
     }
 
     IEnumerator ShowDialogue()
@@ -40,5 +47,7 @@ public class endingdialogue : MonoBehaviour
 
         // "End.." 텍스트 표시
         endText.text = "End..";
+
+
     }
 }

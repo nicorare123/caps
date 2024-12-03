@@ -31,8 +31,17 @@ public class CameraLaycast : MonoBehaviour
 
     public GameObject nomalending;
 
+    public bool nonemouse = true;
+    public bool isusb = false;
+    public GameObject rotateobject;
+    public GameObject phoneend;
+
+    public GameObject[] Phonechange;
     private void Awake()
     {
+        // 마우스를 숨기고 고정
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         // 싱글톤 설정
         if (instance1 == null)
         {
@@ -51,6 +60,7 @@ public class CameraLaycast : MonoBehaviour
     }
     void Update()
     {
+       
         if (Input.GetKeyDown(KeyCode.F) && InteractiveObject != null)
         {
             inventoryManager.AddItem(InteractiveObject);
@@ -147,10 +157,21 @@ public class CameraLaycast : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                  
-                    Debug.Log("출력");
-                    nomalending.SetActive(true);
+                    if (rotateobject.activeSelf)
+                    {
+                        Debug.Log("출력");
+                        nomalending.SetActive(true);
+                    }
+                }
 
+
+            }
+            else if (hit.collider.CompareTag("Phone4")) // 히든엔딩
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    phoneend.SetActive(true);
                 }
 
 
@@ -159,7 +180,9 @@ public class CameraLaycast : MonoBehaviour
             {
 
                 if (Input.GetKeyDown(KeyCode.F))
-                {
+                { // 마우스를 숨기고 고정
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                     gimiceobject[0].SetActive(true); //전기미니게임 시작
                     activeobject[0].SetActive(true); // 전화기 활성화
                     activeobject[1].SetActive(false); // 기존 전화기 비활성화
@@ -202,12 +225,15 @@ public class CameraLaycast : MonoBehaviour
                     sliding.instance1.playerTrigger = true;
                 }
             }
-            else if (hit.collider.CompareTag("password")) // 비밀번호키
+            else if (hit.collider.CompareTag("password")) // 비밀번호키 // 마우스처리
             {
 
                 if (Input.GetKeyDown(KeyCode.F))
-                {
+                { // 마우스를 숨기고 고정
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                     gimiceobject[2].SetActive(true);
+                    
                 }
             }
             else if (hit.collider.CompareTag("Card")) // 비밀번호키
@@ -237,6 +263,9 @@ public class CameraLaycast : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.F) && isbattery) // 배터리 있을때
                 {
+
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                     gimiceobject[5].SetActive(true);
                     gimiceobject[6].SetActive(true);// 돌리기 기믹 ui 활성화 
                     gimiceobject[7].SetActive(true);
@@ -244,7 +273,23 @@ public class CameraLaycast : MonoBehaviour
                 }
                
             }
-           
+            else if (hit.collider.CompareTag("USB")) // USB
+            {
+
+                if (Input.GetKeyDown(KeyCode.F) ) 
+                {
+                    gimiceobject[8].SetActive(false);
+                    isusb = true;
+
+                    Phonechange[0].SetActive(true);
+                    Phonechange[1].SetActive(false);
+
+                }
+                
+                
+
+            }
+
             else
             {
                 // 레이캐스트가 오브젝트에 충돌하지 않으면 이전에 하이라이트된 오브젝트 복원

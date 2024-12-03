@@ -20,6 +20,10 @@ TagManager:
   - Connet
   - Phone3
   - Laser
+  - Portal3f
+  - Portal4f
+  - USB
+  - Phone4
   layers:
   - Default
   - TransparentFX

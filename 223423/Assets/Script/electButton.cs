@@ -83,6 +83,9 @@ public class electButton : MonoBehaviour
 
         if (line[0].activeSelf && line[1].activeSelf && line[2].activeSelf && line[3].activeSelf)// 성공
         {
+            // 마우스를 숨기고 고정
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f;
             line[4].SetActive(false); // 패널 끄기
             Debug.Log("성공");

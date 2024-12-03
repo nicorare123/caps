@@ -9,6 +9,7 @@ public class Electbutton1 : MonoBehaviour
     public Button[] buttons;  // 13개의 버튼 배열
     private Image[] buttonImages;  // 각 버튼의 Image 컴포넌트를 저장할 배열
     public GameObject panel;
+    public GameObject rotateobject;
 
     void Start()
     {
@@ -50,7 +51,9 @@ public class Electbutton1 : MonoBehaviour
             )
         {
             panel.SetActive(false);
-
+            rotateobject.SetActive(true);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
 
         }
     }

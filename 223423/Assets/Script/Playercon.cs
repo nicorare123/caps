@@ -15,6 +15,7 @@ public class Playercon : MonoBehaviour
     public float mouseSensitivity = 300.0f;
     public Transform playerCamera;
     public Vector3 startPosition;
+    public Vector3 usbPostition;
 
     private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
@@ -35,6 +36,11 @@ public class Playercon : MonoBehaviour
 
     public GameObject fadeobject;
 
+    public GameObject Escpanel;
+
+    public bool[] isportal;
+    public GameObject usbobject;
+
 
     void Start()
     {
@@ -51,6 +57,19 @@ public class Playercon : MonoBehaviour
         GroundCheck();
         CheckForObstacleAbove();
 
+        
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0f;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Escpanel.SetActive(true);
+           
+
+
+
+        }
         if (Input.GetKey(KeyCode.C))
         {
             if (!isShrinking)
@@ -73,12 +92,12 @@ public class Playercon : MonoBehaviour
     private void FixedUpdate()
     {
         // 문에 가까이 있을 때 "E" 키를 누르면 지정된 위치로 이동
-        if (isNearDoor && Input.GetKeyDown(KeyCode.E))
+        if (isNearDoor && Input.GetKeyDown(KeyCode.F))
         {
             MoveToTargetPosition();
             
         }
-        if (isNearDoor1 && Input.GetKeyDown(KeyCode.E)) //1층 비상구
+        if (isNearDoor1 && Input.GetKeyDown(KeyCode.F)) //1층 비상구
         {
             MoveToTargetPosition1();
 
@@ -87,6 +106,17 @@ public class Playercon : MonoBehaviour
         {
             MoveToTargetPosition2();
             CameraLaycast.instance1.iscardkey1 = false;
+        }
+        if (isportal[0])
+        {
+            MoveToTargetPosition3();
+            isportal[0] = false;
+
+        }
+        else if (isportal[1])
+        {
+            MoveToTargetPosition4();
+            isportal[1] = false;
         }
 
     }
@@ -158,6 +188,20 @@ public class Playercon : MonoBehaviour
             transform.position = targetPosition[2].position;
         }
     }
+    void MoveToTargetPosition3() //포탈3층
+    {
+        if (targetPosition != null)
+        {
+            transform.position = targetPosition[4].position;
+        }
+    }
+    void MoveToTargetPosition4()
+    {
+        if (targetPosition != null)
+        {
+            transform.position = targetPosition[5].position;
+        }
+    }
 
 
     private void OnTriggerEnter(Collider other)
@@ -171,11 +215,34 @@ public class Playercon : MonoBehaviour
             isNearDoor1 = true; // 문에 가까워졌음을 표시
         }
         else if (other.CompareTag("Laser"))
+        {   if (usbobject.activeSelf)
+            {
+                // CharacterController 비활성화 후 위치 이동
+                controller.enabled = false;
+                transform.position = startPosition;
+                controller.enabled = true;
+            }
+            else if (!usbobject.activeSelf)
+            {
+                controller.enabled = false;
+                transform.position = usbPostition;
+                controller.enabled = true;
+            }
+        }
+        else if (other.CompareTag("Portal3f"))
         {
-            // CharacterController 비활성화 후 위치 이동
-            controller.enabled = false;
-            transform.position = startPosition;
-            controller.enabled = true;
+            isportal[0] = true;
+            
+
+
+        }
+        else if (other.CompareTag("Portal4f"))
+        {
+            if (!usbobject.activeSelf)
+            {
+                Debug.Log("이동가능");
+                isportal[1] = true;
+            }
         }
     }
 
@@ -190,6 +257,7 @@ public class Playercon : MonoBehaviour
             isNearDoor1 = false; // 문에서 멀어졌음을 표시
         }
         
+
     }
     private IEnumerator ActivateTemporarily()
     {

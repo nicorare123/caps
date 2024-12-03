@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Ending : MonoBehaviour
 {
@@ -62,5 +63,10 @@ public class Ending : MonoBehaviour
         }
 
         endImageCanvasGroup.alpha = 1f; // 완전한 투명도 설정
+        yield return new WaitForSeconds(3f);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("Start");
+
     }
 }

@@ -40,6 +40,9 @@ public class keynumber : MonoBehaviour
             door[1].SetActive(true);
             Time.timeScale = 1f;
             Debug.Log("성공");
+            // 마우스를 숨기고 고정
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             passwordpanel.SetActive(false);
             
         }

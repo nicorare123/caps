@@ -101,6 +101,7 @@ public class InventoryManager : MonoBehaviour
     }
     void ToggleInventory()
     {
+       
         isInventoryOpen = !isInventoryOpen;
 
         inventoryPanel.SetActive(isInventoryOpen);
@@ -108,10 +109,16 @@ public class InventoryManager : MonoBehaviour
         if (isInventoryOpen)
         {
             Time.timeScale = 0f;
+            // 마우스를 숨기고 고정
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             Time.timeScale = 1f;
+            // 마우스를 숨기고 고정
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
 
             HideBigImage();
         }
