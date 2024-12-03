@@ -135,7 +135,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _23: 1
-    - _AODirt: 0.21943645
+    - _AODirt: 1
     - _BrightnessAdd: 0.030428972
     - _BumpScale: 1
     - _Color: 0
@@ -145,7 +145,7 @@ Material:
     - _ConcreteBareRange1: 0.65
     - _ConcreteBareSmooth: 0.055235285
     - _ConcreteBareSmooth1: 0.267
-    - _ConcreteBrightness: 0.066702306
+    - _ConcreteBrightness: 0.1
     - _CustomColor: 0
     - _Cutoff: 0.5
     - _DamageNMTiling: 8
@@ -158,9 +158,9 @@ Material:
     - _DirtInsideMultiplier: 0.16221854
     - _DirtRange: 0.6583209
     - _DirtRange1: 0.5948824
-    - _DirtSmooth: 0.7691464
+    - _DirtSmooth: 1
     - _DirtSmooth1: 0.6242941
-    - _DirtSmoothness: 1.0769445
+    - _DirtSmoothness: 2.35
     - _DirtSmoothness1: 1.0769445
     - _DstBlend: 0
     - _EdgesAdd: 0.043460622
@@ -173,7 +173,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.235
     - _GlossyReflections: 1
-    - _MainSmoothness: 0.22412397
+    - _MainSmoothness: 1
     - _MainSmoothness1: 0.22412397
     - _Metallic: 0
     - _Mode: 0
@@ -181,7 +181,7 @@ Material:
     - _PaintEdgesMultiply1: 0.24432394
     - _PaintRange: 0.64755
     - _PaintSmooth: 0.06668227
-    - _PaintSmoothness: 0.1882353
+    - _PaintSmoothness: 1
     - _Parallax: 0.02
     - _Scale: 0.81580454
     - _ScaleFlat: 1.9530317

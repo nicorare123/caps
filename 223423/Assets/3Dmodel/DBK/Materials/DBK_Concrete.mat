@@ -2,20 +2,24 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DBK_Concrete
   m_Shader: {fileID: 4800000, guid: 1fb4d32a4b8c39d4cbbc428e5c3b3224, type: 3}
-  m_ShaderKeywords: 
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -271,10 +275,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AO: 3.07
     - _Albedo: 0
-    - _BareBrightness: 0.98823535
+    - _BareBrightness: 0.43
     - _BareConcreteRange: 0.66243684
     - _BareConcreteSmooth: 0.34628615
     - _BareSmoothness: 0.64473736
@@ -304,9 +309,9 @@ Material:
     - _DamageAmount: 0.91764706
     - _DamageAmount1: 1
     - _DamageAmountInside: 0.88
-    - _DamageAmountSmooth: 14.4
+    - _DamageAmountSmooth: 3
     - _DamageAmountTiling: 4.141967
-    - _DamageBrightness: 1.9594152
+    - _DamageBrightness: 1.21
     - _DamageBrigthness: 3.01
     - _DamageMultiplier: 0.7882353
     - _DamageMultiplier1: 0.6878818
@@ -335,7 +340,7 @@ Material:
     - _DirtRo: 0.90294117
     - _DirtRoughness: 0
     - _DirtSmooth: 0.6242941
-    - _DirtSmoothness: 1.0712789
+    - _DirtSmoothness: 1.13
     - _DirtSmoothness1: 7.1480064
     - _DirtStrenght: 0.38071212
     - _DmgConcreteBrigthness: 3.01
@@ -366,7 +371,7 @@ Material:
     - _InsideSmoothness: 0
     - _Int0: 0
     - _Keyword1: 0
-    - _MainSmoothness: 0.426
+    - _MainSmoothness: 0.554
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -427,3 +432,4 @@ Material:
     - _PlasterColor: {r: 0.58699995, g: 0.37791732, b: 0.22188577, a: 1}
     - _PlasterDirt: {r: 0.33092108, g: 0.45887724, b: 0.503, a: 1}
     - _Vector0: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
