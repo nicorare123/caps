@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 
@@ -12,6 +13,10 @@ public class endingdialogue : MonoBehaviour
 
     public GameObject player;
     public Transform Targetpos;
+    public GameObject endingpanel;
+   
+
+
 
     private string[] dialogues =
     {
@@ -28,12 +33,18 @@ public class endingdialogue : MonoBehaviour
     {
        
         StartCoroutine(ShowDialogue());
-        player.transform.position = Targetpos.position;
+        Debug.Log("실행");
+       
+
+       
 
     }
 
+
+
     IEnumerator ShowDialogue()
     {
+       
         yield return new WaitForSeconds(initialDelay); // 첫 대사 시작 전 3초 대기
         for (int i = 0; i < dialogues.Length; i++)
         {
@@ -48,6 +59,11 @@ public class endingdialogue : MonoBehaviour
         // "End.." 텍스트 표시
         endText.text = "End..";
 
+        yield return new WaitForSeconds(2f);
+       
 
+        endingpanel.SetActive(false);
     }
+
+    
 }

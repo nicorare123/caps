@@ -39,6 +39,7 @@ public class CameraLaycast : MonoBehaviour
     public GameObject[] Phonechange;
 
     public GameObject setactivebuttonobject;
+    
     private void Awake()
     {
         // 마우스를 숨기고 고정
@@ -68,6 +69,11 @@ public class CameraLaycast : MonoBehaviour
             inventoryManager.AddItem(InteractiveObject);
             InteractiveObject.SetActive(false);
             InteractiveObject = null;
+        }
+
+        if (!setactivebuttonobject.activeSelf)
+        {
+            iscardkey = true;
         }
     }
 
@@ -159,10 +165,12 @@ public class CameraLaycast : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    if (rotateobject.activeSelf)
+                    if (rotateobject.activeSelf)// 111121
                     {
+                        
                         Debug.Log("출력");
                         nomalending.SetActive(true);
+                        
                     }
                 }
 
@@ -201,7 +209,7 @@ public class CameraLaycast : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Ebutton1")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
             {
-
+                //111111111
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     if (!iscardkey)
@@ -218,6 +226,7 @@ public class CameraLaycast : MonoBehaviour
                    
                 }
             }
+            
             else if (hit.collider.CompareTag("Eopen")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
             {
 
