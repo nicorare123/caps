@@ -37,6 +37,8 @@ public class CameraLaycast : MonoBehaviour
     public GameObject phoneend;
 
     public GameObject[] Phonechange;
+
+    public GameObject setactivebuttonobject;
     private void Awake()
     {
         // 마우스를 숨기고 고정
@@ -223,6 +225,24 @@ public class CameraLaycast : MonoBehaviour
                 {
                     Debug.Log("엘베열리기");
                     sliding.instance1.playerTrigger = true;
+                }
+            }
+            else if (hit.collider.CompareTag("Eopen1")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    Debug.Log("엘베열리기");
+                    sliding1.instance2.playerTrigger = true;
+                }
+            }
+            else if (hit.collider.CompareTag("Eopen2")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    Debug.Log("엘베열리기");
+                    sliding2.instance3.playerTrigger = true;
                 }
             }
             else if (hit.collider.CompareTag("password")) // 비밀번호키 // 마우스처리

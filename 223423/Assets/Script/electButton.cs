@@ -14,7 +14,7 @@ public class electButton : MonoBehaviour
     public bool green1 = false;
 
     public GameObject[] line;
-
+    public GameObject Electobject;
     public void Blue()
     {
         blue = true;
@@ -26,6 +26,7 @@ public class electButton : MonoBehaviour
     public void Red()
     {
         red = true;
+
         blue1 = false;
         yellow1 = false;
         green1 = false;
@@ -41,6 +42,7 @@ public class electButton : MonoBehaviour
     public void Green()
     {
         green = true;
+
         red1 = false;
         yellow1 = false;
         blue1 = false;
@@ -83,12 +85,15 @@ public class electButton : MonoBehaviour
 
         if (line[0].activeSelf && line[1].activeSelf && line[2].activeSelf && line[3].activeSelf)// 성공
         {
+            Electobject.SetActive(false);
             // 마우스를 숨기고 고정
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f;
+
             line[4].SetActive(false); // 패널 끄기
             Debug.Log("성공");
+
         }
         if (line[4].activeSelf)
         {

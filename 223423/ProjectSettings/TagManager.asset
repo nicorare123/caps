@@ -24,6 +24,9 @@ TagManager:
   - Portal4f
   - USB
   - Phone4
+  - Eopen1
+  - Eopen2
+  - Ebutton2
   layers:
   - Default
   - TransparentFX
