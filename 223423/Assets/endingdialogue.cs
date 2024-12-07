@@ -14,7 +14,8 @@ public class endingdialogue : MonoBehaviour
     public GameObject player;
     public Transform Targetpos;
     public GameObject endingpanel;
-   
+    public CharacterController controller;
+
 
 
 
@@ -31,12 +32,13 @@ public class endingdialogue : MonoBehaviour
 
     void Start()
     {
-       
+        controller.enabled = false;
         StartCoroutine(ShowDialogue());
         Debug.Log("실행");
        
-
+        controller.enabled = true;
        
+
 
     }
 
@@ -52,7 +54,7 @@ public class endingdialogue : MonoBehaviour
             yield return new WaitForSeconds(dialogueDelay);
         }
         dialogueText.text = ""; // 마지막 대사를 지움
-
+        player.transform.position = Targetpos.position;
         // 대사 끝난 후 4초 대기
         yield return new WaitForSeconds(endTextDelay);
 

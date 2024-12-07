@@ -10,6 +10,7 @@ public class Electbutton1 : MonoBehaviour
     private Image[] buttonImages;  // 각 버튼의 Image 컴포넌트를 저장할 배열
     public GameObject panel;
     public GameObject rotateobject;
+    public GameObject wall;
 
     void Start()
     {
@@ -50,6 +51,7 @@ public class Electbutton1 : MonoBehaviour
 
             )
         {
+            wall.SetActive(false);
             panel.SetActive(false);
             rotateobject.SetActive(true);
             Cursor.visible = false;
