@@ -12,6 +12,9 @@ public class Electbutton1 : MonoBehaviour
     public GameObject rotateobject;
     public GameObject wall;
 
+    public GameObject dialogueobject;
+    public GameObject dialogueobject1;
+
     void Start()
     {
         // 버튼과 버튼 이미지 컴포넌트를 배열에 할당
@@ -54,6 +57,8 @@ public class Electbutton1 : MonoBehaviour
             wall.SetActive(false);
             panel.SetActive(false);
             rotateobject.SetActive(true);
+            dialogueobject.SetActive(true);
+            dialogueobject1.SetActive(true);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 

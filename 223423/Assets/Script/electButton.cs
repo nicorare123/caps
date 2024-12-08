@@ -15,6 +15,7 @@ public class electButton : MonoBehaviour
 
     public GameObject[] line;
     public GameObject Electobject;
+    public GameObject dialogue;
     public void Blue()
     {
         blue = true;
@@ -90,7 +91,7 @@ public class electButton : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f;
-
+            dialogue.SetActive(true);
             line[4].SetActive(false); // 패널 끄기
             Debug.Log("성공");
 

@@ -39,6 +39,7 @@ public class CameraLaycast : MonoBehaviour
     public GameObject[] Phonechange;
 
     public GameObject setactivebuttonobject;
+    public GameObject setactivebuttonobject1;
     
     private void Awake()
     {
@@ -160,17 +161,22 @@ public class CameraLaycast : MonoBehaviour
                     GameManager.instance.condition[2] = true;
                 }
             }
+         
             else if (hit.collider.CompareTag("Phone3")) // 전기전선 gamemanager 조건 true&& coditionPhone1 && coditionPhone2
             {
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
+                   
                     if (rotateobject.activeSelf)// 111121
                     {
-                        
+
                         Debug.Log("출력");
                         nomalending.SetActive(true);
-                        
+
+                    }
+                    else {
+                        GameManager.instance.condition[5] = true;
                     }
                 }
 
@@ -307,11 +313,13 @@ public class CameraLaycast : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F) ) 
                 {
+                    setactivebuttonobject1.SetActive(true);
                     gimiceobject[8].SetActive(false);
                     isusb = true;
 
                     Phonechange[0].SetActive(true);
                     Phonechange[1].SetActive(false);
+                    Phonechange[2].SetActive(false);
 
                 }
                 

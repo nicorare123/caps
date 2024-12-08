@@ -15,6 +15,7 @@ public class endingdialogue : MonoBehaviour
     public Transform Targetpos;
     public GameObject endingpanel;
     public CharacterController controller;
+    public GameObject[] chageobject;
 
 
 
@@ -35,9 +36,11 @@ public class endingdialogue : MonoBehaviour
        // controller.enabled = false;
         StartCoroutine(ShowDialogue());
         Debug.Log("½ÇÇà");
-       
+        chageobject[0].SetActive(true);
+        chageobject[1].SetActive(false);
+
      //   controller.enabled = true;
-       
+
 
 
     }

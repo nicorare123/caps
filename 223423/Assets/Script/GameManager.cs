@@ -75,6 +75,15 @@ public class GameManager : MonoBehaviour
             condition[4] = false;
 
         }
+        else if (condition[5]) // 3층전화기
+        {
+            Debug.Log("작동11");
+            TextUI.SetActive(true);
+            // 조건이 true라면 텍스트를 출력하고 사라지게 만듦
+            StartCoroutine(DisplayText5());
+            condition[5] = false;
+
+        }
     }
 
     private IEnumerator DisplayText()
@@ -93,7 +102,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator DisplayText1()
     {
         // 텍스트 출력
-        messageText.text = "...전기가 나간거같다11.";
+        messageText.text = "전기가 나간것같다, 수리를 할 방법을 찾아보자..";
 
         // 3초 대기
         yield return new WaitForSeconds(3f);
@@ -109,6 +118,8 @@ public class GameManager : MonoBehaviour
         messageText.text = ".....";
 
         // 3초 대기
+        yield return new WaitForSeconds(3f);
+        messageText.text = " 1층은 모두 먹통인것같다, 나갈수도 없으니 올라가서 연락수단을 찾아야겠다.";
         yield return new WaitForSeconds(3f);
 
         // 텍스트를 빈 문자열로 설정하여 텍스트를 사라지게 함
@@ -133,6 +144,19 @@ public class GameManager : MonoBehaviour
     {
         // 텍스트 출력
         messageText.text = "키카드가 필요하다.";
+
+        // 3초 대기
+        yield return new WaitForSeconds(3f);
+
+        // 텍스트를 빈 문자열로 설정하여 텍스트를 사라지게 함
+        messageText.text = "";
+
+        TextUI.SetActive(false);
+    }
+    private IEnumerator DisplayText5()
+    {
+        // 텍스트 출력
+        messageText.text = "이 층도 전력이 말썽인걸까.";
 
         // 3초 대기
         yield return new WaitForSeconds(3f);
