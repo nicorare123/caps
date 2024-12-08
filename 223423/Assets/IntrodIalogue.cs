@@ -59,5 +59,7 @@ public class IntrodIalogue : MonoBehaviour
         dialogueText.text = "여기는 어디지?..";
         yield return new WaitForSeconds(4f);
         dialogueText.text = ""; // 마지막 대사를 지움
+        Destroy(gameObject);
+
     }
 }
