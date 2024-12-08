@@ -12,9 +12,10 @@ Material:
   m_Parent: {fileID: 2100000, guid: b8cb1634efd6cfe4c93d339a920ab7a2, type: 2}
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords:
+  - _EMISSION
   - _NORMALMAP
   m_InvalidKeywords: []
-  m_LightmapFlags: 6
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
