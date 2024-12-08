@@ -11,15 +11,13 @@ public class dialougeobject1 : MonoBehaviour
 
     private void Start()
     {
-        if (dialogueText != null)
-        {
+        
             // 코루틴 실행
             StartCoroutine(DisplayMessageCoroutine());
-        }
-        else
-        {
-            Debug.LogError("Dialogue Text is not assigned in the Inspector!");
-        }
+        
+        
+            
+        
     }
 
     private System.Collections.IEnumerator DisplayMessageCoroutine()
