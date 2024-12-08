@@ -32,11 +32,11 @@ public class endingdialogue : MonoBehaviour
 
     void Start()
     {
-        controller.enabled = false;
+       // controller.enabled = false;
         StartCoroutine(ShowDialogue());
         Debug.Log("½ÇÇà");
        
-        controller.enabled = true;
+     //   controller.enabled = true;
        
 
 
