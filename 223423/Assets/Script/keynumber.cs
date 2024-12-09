@@ -29,6 +29,14 @@ public class keynumber : MonoBehaviour
         {
             Time.timeScale = 0f;
         }
+
+        if (currentInput != correctPassword)
+        {
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+        }
     }
 
     // 입력 확인
