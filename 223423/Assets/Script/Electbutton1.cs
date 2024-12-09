@@ -50,7 +50,7 @@ public class Electbutton1 : MonoBehaviour
             angle[9] &&
             angle[10] &&
             angle[11] &&
-            angle[12] 
+            angle[12]
 
 
             )
@@ -64,6 +64,10 @@ public class Electbutton1 : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             light1.SetActive(true);
 
+        }
+        else {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     public void RotateButtonImage(int buttonIndex)
