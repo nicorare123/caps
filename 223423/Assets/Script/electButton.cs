@@ -16,6 +16,7 @@ public class electButton : MonoBehaviour
     public GameObject[] line;
     public GameObject Electobject;
     public GameObject dialogue;
+    public GameObject targetObject; // 콜라이더를 제거할 오브젝트
     public void Blue()
     {
         blue = true;
@@ -65,8 +66,29 @@ public class electButton : MonoBehaviour
         green1 = true;
     }
 
+    public void Start()
+    {
+        if (targetObject == null)
+        {
+            Debug.LogError("Target Object가 할당되지 않았습니다.");
+            return;
+        }
+
+        Collider collider = targetObject.GetComponent<Collider>();
+
+        if (collider != null)
+        {
+            Destroy(collider); // 콜라이더 삭제
+            Debug.Log($"Collider removed from {targetObject.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"Target Object {targetObject.name}에 Collider가 없습니다.");
+        }
+    }
     public void Update()
     {
+        
         if (blue1 && blue)
         {
             line[0].SetActive(true);
@@ -91,9 +113,15 @@ public class electButton : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f;
+
             dialogue.SetActive(true);
             line[4].SetActive(false); // 패널 끄기
             Debug.Log("성공");
+
+        }
+        else {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
         }
         if (line[4].activeSelf)
