@@ -41,13 +41,25 @@ public class Playercon : MonoBehaviour
     public bool[] isportal;
     public GameObject usbobject;
 
+    public AudioClip footstepSound;  // 발소리 오디오 클립
+    public float footstepInterval = 0.5f; // 발소리 간격 (초 단위)
+
+    private AudioSource audioSource; // 발소리를 재생할 오디오 소스
+    private float footstepTimer; // 발소리 타이머
+
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         originalScale = transform.localScale;
         targetPosition[3].position = startPosition;
-        
+
+        // 오디오 소스 설정
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = footstepSound;
+        audioSource.loop = false;
+        audioSource.playOnAwake = false; // 자동 재생 방지
+
     }
 
     void Update()
@@ -57,7 +69,7 @@ public class Playercon : MonoBehaviour
         GroundCheck();
         CheckForObstacleAbove();
 
-        
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -65,7 +77,7 @@ public class Playercon : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Escpanel.SetActive(true);
-           
+
 
 
 
@@ -87,7 +99,7 @@ public class Playercon : MonoBehaviour
             }
         }
 
-       
+
     }
     private void FixedUpdate()
     {
@@ -95,7 +107,7 @@ public class Playercon : MonoBehaviour
         if (isNearDoor && Input.GetKeyDown(KeyCode.F))
         {
             MoveToTargetPosition();
-            
+
         }
         if (isNearDoor1 && Input.GetKeyDown(KeyCode.F)) //1층 비상구
         {
@@ -138,7 +150,24 @@ public class Playercon : MonoBehaviour
         }
 
         controller.Move(moveDirection * Time.deltaTime);
-    }
+
+        // 발소리 처리
+        if (isGrounded && move.magnitude > 0) // 움직이고 땅에 있을 때
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f) // 타이머가 0 이하일 때 발소리 재생
+            {
+                audioSource.Play();
+                footstepTimer = footstepInterval; // 타이머 초기화
+            }
+        }
+        else // 움직이지 않거나 공중에 있을 때
+        {
+            footstepTimer = 0f; // 타이머 초기화
+            audioSource.Stop(); // 사운드 멈춤
+        }
+    
+}
 
     void RotatePlayer()
     {

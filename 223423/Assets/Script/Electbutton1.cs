@@ -14,6 +14,7 @@ public class Electbutton1 : MonoBehaviour
 
     public GameObject dialogueobject;
     public GameObject dialogueobject1;
+    public GameObject light1;
 
     void Start()
     {
@@ -61,6 +62,7 @@ public class Electbutton1 : MonoBehaviour
             dialogueobject1.SetActive(true);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            light1.SetActive(true);
 
         }
     }

@@ -16,6 +16,7 @@ public class endingdialogue : MonoBehaviour
     public GameObject endingpanel;
     public CharacterController controller;
     public GameObject[] chageobject;
+    public GameObject panel;
 
 
 
@@ -62,12 +63,14 @@ public class endingdialogue : MonoBehaviour
         yield return new WaitForSeconds(endTextDelay);
 
         // "End.." 텍스트 표시
-        endText.text = "End..";
+        endText.text = "End..?";
 
         yield return new WaitForSeconds(2f);
-       
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        panel.SetActive(true);
 
-        endingpanel.SetActive(false);
+        
     }
 
     
